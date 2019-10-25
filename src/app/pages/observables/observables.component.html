@@ -61,21 +61,16 @@ btn3.addEventListener('click', (e) => &#123;
   &#125;;
   obs3.subscribe(onNext, onError, onComplete);
 &#125;);
-
-const clear3 = document.querySelector('#clear3');
-clear3.addEventListener('click', (e) => &#123;
-  res3.textContent = '';
-&#125;);
 	</pre>
 	<pre id="result3"></pre>
 </div>
-<p>In the example above, 'from' is a specialized method that creates an observable off of an array of values. When it is
-	subscribed to, it emits those values, one after the other until complete.</p>
 <p>
 	<button id="click_me3">CLICK ME</button>
 	&nbsp;
 	<button id="clear3">CLEAR LOG</button>
 </p>
+<p>In the example above, 'from' is a specialized method that creates an observable off of an array of values. When it is
+	subscribed to, it emits those values, one after the other until complete.</p>
 <p>There are a couple of things to note about this:</p>
 <ol>
 	<li>This observable does NOTHING until it is subscribed to.</li>
@@ -87,5 +82,5 @@ clear3.addEventListener('click', (e) => &#123;
 <p>Some observables will never complete (e.g. Angular ActiveRoute), and ALWAYS need to be unsubscribed to or problems will ensue.</p>
 <p class="flex-column">
 	<a routerLink="/async"><strong>PART 3</strong> - async and await</a>
-	<a routerLink="/pipe"><strong>PART 5</strong> - Pipe</a>
+	<a routerLink="/pipe"><strong>PART 5</strong> - Pipes</a>
 </p>

@@ -19,7 +19,10 @@
 <p><strong>pipe(filter)</strong> example:</p>
 <div class="flex-column">
 	<pre>
-const obs1 = <strong>from</strong>([1, 2, 3, 4, 5]).pipe(<strong>filter</strong>(<em>num => num % 2 === 0</em>));
+const obs1 =
+  <strong>from</strong>([1, 2, 3, 4, 5])
+  .pipe(<strong>filter</strong>(<em>num => num % 2 === 0</em>));
+
 const btn1 = document.querySelector('#click_me1');
 const res1 = document.querySelector('#result1');
 btn1.addEventListener('click', (e) => &#123;
@@ -27,11 +30,6 @@ btn1.addEventListener('click', (e) => &#123;
   obs1.subscribe((n) => &#123;
     res1.textContent += '\n' + `OBSERVED: $&#123;n&#125;`;
   &#125;);
-&#125;);
-
-const clear1 = document.querySelector('#clear1');
-clear1.addEventListener('click', (e) => &#123;
-  res1.textContent = '';
 &#125;);
 	</pre>
 	<pre id="result1"></pre>
@@ -43,7 +41,10 @@ clear1.addEventListener('click', (e) => &#123;
 </p><p><strong>pipe(map)</strong> example:</p>
 <div class="flex-column">
 	<pre>
-const obs2 = <strong>from</strong>([1, 2, 3, 4, 5]).pipe(<strong>map</strong>(<em>num => num * 2</em>));
+const obs2 =
+  <strong>from</strong>([1, 2, 3, 4, 5])
+  .pipe(<strong>map</strong>(<em>num => num * 2</em>));
+
 const btn2 = document.querySelector('#click_me2');
 const res2 = document.querySelector('#result2');
 btn2.addEventListener('click', (e) => &#123;
@@ -51,11 +52,6 @@ btn2.addEventListener('click', (e) => &#123;
   obs2.subscribe((n) => &#123;
     res2.textContent += '\n' + `OBSERVED: $&#123;n&#125;`;
   &#125;);
-&#125;);
-
-const clear2 = document.querySelector('#clear2');
-clear2.addEventListener('click', (e) => &#123;
-  res2.textContent = '';
 &#125;);
 	</pre>
 	<pre id="result2"></pre>
@@ -67,7 +63,10 @@ clear2.addEventListener('click', (e) => &#123;
 </p><p><strong>pipe(first)</strong> example:</p>
 <div class="flex-column">
 	<pre>
-const obs3 = <strong>from</strong>([1, 2, 3, 4, 5]).pipe(<strong>first</strong>());
+const obs3 =
+  <strong>from</strong>([1, 2, 3, 4, 5])
+  .pipe(<strong>first</strong>());
+
 const btn3 = document.querySelector('#click_me3');
 const res3 = document.querySelector('#result3');
 btn3.addEventListener('click', (e) => &#123;
@@ -75,11 +74,6 @@ btn3.addEventListener('click', (e) => &#123;
   obs3.subscribe((n) => &#123;
     res3.textContent += '\n' + `OBSERVED: $&#123;n&#125;`;
   &#125;);
-&#125;);
-
-const clear3 = document.querySelector('#clear3');
-clear3.addEventListener('click', (e) => &#123;
-  res3.textContent = '';
 &#125;);
 	</pre>
 	<pre id="result3"></pre>

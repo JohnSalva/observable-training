@@ -34,12 +34,6 @@ btn1.addEventListener('click', (e) => &#123;
   &#125;;
   sub = subj.subscribe(onNext, onError, onComplete);
 &#125;);
-
-const clear1 = document.querySelector('#clear1');
-clear1.addEventListener('click', (e) => &#123;
-  sub.unsubscribe();
-  res1.textContent += '\nSTOPPED';
-&#125;);
 	</pre>
 	<pre id="result1"></pre>
 </div>

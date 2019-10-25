@@ -18,7 +18,8 @@ export class SubjectsComponent implements OnInit, OnDestroy {
       subj.next(++counter);
     }, 1000);
 
-    const btn1 = document.querySelector('#click_me1');
+    const btn1 = document.querySelector('#click_me1') as HTMLButtonElement;
+    const clear1 = document.querySelector('#clear1') as HTMLButtonElement;
     const res1 = document.querySelector('#result1');
     let sub: Subscription;
     btn1.addEventListener('click', (e) => {
@@ -34,12 +35,16 @@ export class SubjectsComponent implements OnInit, OnDestroy {
       };
       sub = subj.subscribe(onNext, onError, onComplete);
       this.subs.push(sub);
+      btn1.disabled = true;
+      clear1.disabled = false;
     });
 
-    const clear1 = document.querySelector('#clear1');
+    clear1.disabled = true;
     clear1.addEventListener('click', (e) => {
       sub.unsubscribe();
       res1.textContent += '\nSTOPPED';
+      btn1.disabled = false;
+      clear1.disabled = true;
     });
 
   }

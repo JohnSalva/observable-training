@@ -39,7 +39,7 @@ export class SubjectsComponent implements OnInit, OnDestroy {
     const clear1 = document.querySelector('#clear1');
     clear1.addEventListener('click', (e) => {
       sub.unsubscribe();
-      res1.textContent += '\nUNSUBSCRIBED';
+      res1.textContent += '\nSTOPPED';
     });
 
   }

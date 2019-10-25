@@ -7,6 +7,7 @@ import { StartComponent } from './pages/start/start.component';
 import { EventsComponent } from './pages/events/events.component';
 import { PromisesComponent } from './pages/promises/promises.component';
 import { ObservablesComponent } from './pages/observables/observables.component';
+import { AsyncComponent } from './pages/async/async.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ObservablesComponent } from './pages/observables/observables.component'
     StartComponent,
     EventsComponent,
     PromisesComponent,
-    ObservablesComponent
+    ObservablesComponent,
+    AsyncComponent
   ],
   imports: [
     BrowserModule,

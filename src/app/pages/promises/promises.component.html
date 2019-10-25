@@ -1,1 +1,80 @@
-<p>promises works!</p>
+<h1>Promises</h1>
+<p>Promises is a design pattern that allows for dealing with asyncronous code.</p>
+<p>It shares some similarities with event handling, but it's express purpose is to deal with something that will return
+	a result at some future point.</p>
+<p>The 'event' in this case would be 'the result is now available'.</p>
+<p>The idea is, a piece of code kicks off process that will be run asyncronously, but it IMMEDIATELY returns an object.
+</p>
+<p>This object (called a Promise), is a reference that allows one to manage what happens when the asyncronous process is
+	complete.</p>
+<p>Take the ajax request in the event handler. If you had a method that returned a promise, it might look somethinig
+	like this:</p>
+<pre>
+const promise = GetXHR('https://cs8.scorpion.co/oauth/test');
+promise.then(function (data) &#123;
+	btn4.textContent = 'COMPLETE';
+	btn4.disabled = false;
+	pre4.textContent = data;
+&#125;)
+</pre>
+<p>The method 'then' in this case allows one to describe what to do when the asyncronous code completes.</p>
+<p>In the javascript implementation of promises, there are three main methods that belong to the Promise object:</p>
+<ol>
+	<li><strong>promise.then</strong>(<em>handler</em>) - what to do when the asyncronous code is completed successfully.
+	</li>
+	<li><strong>promise.catch</strong>(<em>handler</em>) - what to do if there is an error and the code cannot complete
+		successfully.
+	</li>
+	<li><strong>promise.finally</strong>(<em>handler</em>) - what to do when the code has finished, regardless of whether or not it was successful.
+	</li>
+</ol>
+<p>Note that Promises are a native javascript implementation as of ECMAScript 6, introduced in 2015 and available in modern browsers (e.g. not IE).</p>
+<p>Here's an example of writing the GetXHR method that returns a Promise:</p>
+<div class="flex-column">
+	<pre>
+function GetXHR(url) &#123;
+  return new Promise((resolve, reject) => &#123;
+	const xhr = new XMLHttpRequest();
+	xhr.addEventListener('load', (evt) => &#123;
+	  if (xhr.status === 200) &#123;
+		resolve(xhr.responseText);
+	  &#125; else &#123;
+		reject(xhr.responseText);
+	  &#125;
+	&#125;);
+	xhr.addEventListener('error', (evt) => &#123;
+	  reject(xhr.responseText);
+	&#125;);
+	xhr.open('GET', url, true);
+	xhr.send();
+  &#125;);
+&#125;
+
+const btn1 = document.querySelector('#test_xhr');
+const pre1 = document.querySelector('#xhr_result');
+btn1.addEventListener('click', (e) => &#123;
+  btn1.disabled = true;
+  pre1.textContent = 'PROCESSING ...';
+  GetXHR('https://cs8.scorpion.co/oauth/test')
+	.then((data) => &#123;
+	  btn1.disabled = false;
+	  pre1.textContent = data;
+	&#125;);
+&#125;);
+	</pre>
+	<pre id="xhr_result">
+
+	</pre>
+</div>
+<p>
+	<button id="test_xhr">CLICK ME</button>
+</p>
+<p>The Promise object is constructed by passing in a handler.  That handler accepts two parameters, a 'resolve' and a 'reject' method.</p>
+<p>Both of the methods are supplied BY THE PROMISE itself. In other words, the internal plumbing of the Promise is
+	supplying those methods to you, the developer.</p>
+<p>Your code runs the 'resolve' when everything is good, and the 'reject' if it isn't</p>
+<p>The Promise takes care of the rest.</p>
+<p class="flex-column">
+	<a routerLink="/events"><strong>PART 1</strong> - Events</a>
+	<a routerLink="/async"><strong>PART 2a</strong> - async and await</a>
+</p>

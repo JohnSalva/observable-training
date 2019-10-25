@@ -1,1 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+	font: normal 400 14px/22px Arial;
+	background: #f0f0f0;
+	color: #1d1d1d;
+}
+
+app-root {
+	display: block;
+	max-width: 1000px;
+	margin: 20px auto;
+	background: #fff;
+	border: solid 1px #eeeeee;
+	border-radius: 6px;
+	box-shadow: 2px 2px 4px rgba(0,0,0,.4);
+	padding: 25px 40px;
+}
+
+h1 {
+	font-size: 1.5em;
+}
+
+p {
+	margin: 1.5em 0;
+}
+
+a, a:visited {
+	color: #005095;
+}
+
+pre {
+	display: block;
+	font-family: "Lucida Console", Monaco, monospace;
+    font-size: 12px;
+    tab-size: 4;
+	line-height: 1.5;
+	border: solid 1px #ccc;
+	padding: 1.5em 3em;
+	margin: 0;
+}
+
+.flex-column {
+	display: flex;
+	justify-content: space-between;
+}
+
+.flex-column > pre {
+	flex: 1 1 50%;
+}
+
+.flex-column > pre + pre {
+	margin-left: 10px;
+}

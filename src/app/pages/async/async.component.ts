@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-promises',
-  templateUrl: './promises.component.html',
-  styleUrls: ['./promises.component.scss']
+  selector: 'app-async',
+  templateUrl: './async.component.html',
+  styleUrls: ['./async.component.scss']
 })
-export class PromisesComponent implements OnInit {
+export class AsyncComponent implements OnInit {
 
   constructor() { }
 
@@ -31,14 +31,22 @@ export class PromisesComponent implements OnInit {
 
     const btn1 = document.querySelector('#test_xhr') as HTMLButtonElement;
     const pre1 = document.querySelector('#xhr_result');
+
+    async function RunTest() {
+      const data1 = await GetXHR('https://cs8.scorpion.co/oauth/test') as string;
+      pre1.textContent = 'ONE - ' + data1;
+      const data2 = await GetXHR('https://cs8.scorpion.co/oauth/test') as string;
+      pre1.textContent += '\n' + 'TWO - ' + data2;
+      const data3 = await GetXHR('https://cs8.scorpion.co/oauth/test') as string;
+      pre1.textContent += '\n' + 'THREE - ' + data3;
+      pre1.textContent += '\n' + 'COMPLETE';
+      btn1.disabled = false;
+    }
+
     btn1.addEventListener('click', (e) => {
       btn1.disabled = true;
+      RunTest();
       pre1.textContent = 'PROCESSING ...';
-      GetXHR('https://cs8.scorpion.co/oauth/test')
-        .then((data: string) => {
-          btn1.disabled = false;
-          pre1.textContent = data;
-        });
     });
 
   }

@@ -1,5 +1,91 @@
 <h1>Observables</h1>
+<p>Observables are another design pattern that shares some similaries with both event handling and promises.</p>
+<p>The concept of this design pattern has been around for a while, but it's only more recently been implemented in
+	javascript in a library called 'rxjs'</p>
+<p>RX in this case stands for "Reactive Extensions"</p>
+<p><strong>Reactive</strong>, in the sense that it dealing with reacting changes in states</p>
+<p><strong>Extensions</strong>, in the sense that these are 'extensions' to the language you're working in to help
+	implement the pattern.</p>
+<p>The pattern includes:</p>
+<ol>
+	<li><strong>AN OBVSERVABLE.</strong> This is a thing that can be observed. It is an object that represents the
+		state. One obtains the observable first, and then one observes it.</li>
+	<li><strong>AN OBSERVER.</strong> This is the things doing the observing. When the observable says "there's the new
+		state", the observe does something with the new state.</li>
+</ol>
+<p>Similar to the event handling, one subscribes to the observable.</p>
+<p>In the example below, 'fromEvent' is a specialized method that creates an Observable object off of the click event.</p>
+<pre>
+const btn1 = document.querySelector('#click_me1');
+let count1 = 0;
+const obs1 = <strong>fromEvent</strong>(btn1, 'click');
+const sub1 = obs1.subscribe((e) => &#123;
+  btn1.textContent = `CLICKED $&#123;++count1&#125; TIMES`;
+&#125;);
+</pre>
+<p>
+	<button id="click_me1">CLICK ME</button>
+</p>
+<p>Different from event handling, the activity of 'subscribe' returns an object called a 'Subscription'. This object
+	contains the method allowing one to unsubscribe.  After the first click the observable is unsubscribed.</p>
+<pre>
+const btn2 = document.querySelector('#click_me2') as HTMLButtonElement;
+let count2 = 0;
+const obs2 = <strong>fromEvent</strong>(btn2, 'click');
+const sub2 = obs2.subscribe((e) => &#123;
+  btn2.textContent = `CLICKED $&#123;++count2&#125; TIMES`;
+  sub2.unsubscribe();
+  btn2.disabled = true;
+&#125;);
+</pre>
+<p>
+	<button id="click_me2">CLICK ME</button>
+</p>
+<p>Event handling is a specific way to use obsevables, but at it's core, an observable is simply a pattern to emit states.</p>
+<p>Consider this:</p>
+<div class="flex-column">
+	<pre>
+const obs3 = <strong>from</strong>([1, 2, 3, 4]);
+const btn3 = document.querySelector('#click_me3');
+const res3 = document.querySelector('#result3');
+btn3.addEventListener('click', (e) => &#123;
+  res3.textContent = 'OBSERVING';
+  const onNext = (n) => &#123;
+	res3.textContent += '\n' + `OBSERVED: $&#123;n&#125;`;
+  &#125;;
+  const onError = (e) => &#123;
+	alert('ERROR');
+  &#125;;
+  const onComplete = () => &#123;
+	res3.textContent += '\nCOMPLETE';
+  &#125;;
+  obs3.subscribe(onNext, onError, onComplete);
+&#125;);
+
+const clear3 = document.querySelector('#clear3');
+clear3.addEventListener('click', (e) => &#123;
+  res3.textContent = '';
+&#125;);
+	</pre>
+	<pre id="result3"></pre>
+</div>
+<p>In the example above, 'from' is a specialized method that creates an observable off of an array of values. When it is
+	subscribed to, it emits those values, one after the other until complete.</p>
+<p>
+	<button id="click_me3">CLICK ME</button>
+	&nbsp;
+	<button id="clear3">CLEAR LOG</button>
+</p>
+<p>There are a couple of things to note about this:</p>
+<ol>
+	<li>The observable does NOTHING until it is subscribed to.</li>
+	<li>It does not get destroyed when complete.</li>
+	<li>It can subscribed to as many times as you like.</li>
+	<li>Because it completes, it does not need the unsubscribed to.</li>
+</ol>
+<p>Some observables will always complete (e.g. HTTP call) and don't need to be unsubscribed to.</p>
+<p>Some observables will never complete (e.g. Angular ActiveRoute), and ALWAYS need to be unsubscribed to or problems will ensue.</p>
 <p class="flex-column">
-	<a routerLink="/promises"><strong>PART 2</strong> - Promises</a>
-	<a routerLink="/"><strong>Back to start</strong></a>
+	<a routerLink="/async"><strong>PART 3</strong> - async and await</a>
+	<a routerLink="/pipe"><strong>PART 5</strong> - Pipe</a>
 </p>

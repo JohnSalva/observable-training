@@ -8,6 +8,8 @@ import { EventsComponent } from './pages/events/events.component';
 import { PromisesComponent } from './pages/promises/promises.component';
 import { ObservablesComponent } from './pages/observables/observables.component';
 import { AsyncComponent } from './pages/async/async.component';
+import { PipeComponent } from './pages/pipe/pipe.component';
+import { SubjectsComponent } from './pages/subjects/subjects.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { AsyncComponent } from './pages/async/async.component';
     EventsComponent,
     PromisesComponent,
     ObservablesComponent,
-    AsyncComponent
+    AsyncComponent,
+    PipeComponent,
+    SubjectsComponent
   ],
   imports: [
     BrowserModule,

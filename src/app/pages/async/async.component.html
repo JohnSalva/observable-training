@@ -6,17 +6,17 @@
 <p>It might look something like this:</p>
 <pre>
 GetXHR('https://cs8.scorpion.co/oauth/test')
-	.then(function (data) &#123;
-		console.log('ONE', data);
-		GetXHR('https://cs8.scorpion.co/oauth/test')
-			.then(function (data) &#123;
-				console.log('TWO', data);
-				GetXHR('https://cs8.scorpion.co/oauth/test')
-					.then(function (data) &#123;
-						console.log('THREE', data);
-					&#125;)
-			&#125;)
-	&#125;)
+  .then(function (data) &#123;
+    console.log('ONE', data);
+      GetXHR('https://cs8.scorpion.co/oauth/test')
+        .then(function (data) &#123;
+          console.log('TWO', data);
+            GetXHR('https://cs8.scorpion.co/oauth/test')
+              .then(function (data) &#123;
+                 console.log('THREE', data);
+               &#125;)
+        &#125;)
+  &#125;)
 </pre>
 <p>The code can become hard to follow as you've got nested handlers inside handlers inside handlers.</p>
 <p>But because the GetXHR method returns a promise, it allows one to 'await' the Promise.</p>
@@ -75,5 +75,5 @@ btn1.addEventListener('click', (e) => &#123;
 </ol>
 <p class="flex-column">
 	<a routerLink="/promises"><strong>PART 2</strong> - Promises</a>
-	<a routerLink="/observables"><strong>PART 3</strong> - Observables</a>
+	<a routerLink="/observables"><strong>PART 4</strong> - Observables</a>
 </p>

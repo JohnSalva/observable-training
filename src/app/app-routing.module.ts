@@ -5,6 +5,8 @@ import { EventsComponent } from './pages/events/events.component';
 import { PromisesComponent } from './pages/promises/promises.component';
 import { ObservablesComponent } from './pages/observables/observables.component';
 import { AsyncComponent } from './pages/async/async.component';
+import { PipeComponent } from './pages/pipe/pipe.component';
+import { SubjectsComponent } from './pages/subjects/subjects.component';
 
 
 const routes: Routes = [
@@ -17,6 +19,8 @@ const routes: Routes = [
   { path: 'promises', component: PromisesComponent },
   { path: 'async', component: AsyncComponent },
   { path: 'observables', component: ObservablesComponent },
+  { path: 'pipe', component: PipeComponent },
+  { path: 'subjects', component: SubjectsComponent },
   { path: '**', redirectTo: '/' }
 ];
 

@@ -12,10 +12,9 @@ export class EventsComponent implements OnInit {
   ngOnInit() {
     const btn1 = document.querySelector('#click_me1');
     let count1 = 0;
-    const fn1 = (e) => {
+    btn1.addEventListener('click', (e) => {
       btn1.textContent = `CLICKED ${++count1} TIMES`;
-    };
-    btn1.addEventListener('click', fn1);
+    });
 
     const btn2 = document.querySelector('#click_me1');
     let count2 = 0;
@@ -27,31 +26,25 @@ export class EventsComponent implements OnInit {
 
     const btn3 = document.querySelector('#click_me3');
     let count3 = 0;
-    btn3.addEventListener(
-      'click',
-      (e) => {
-        btn3.textContent = `CLICKED ${++count3} TIMES`;
-      }
-    );
-    btn3.removeEventListener(
-      'click',
-      (e) => {
-        btn3.textContent = `CLICKED ${++count3} TIMES`;
-      }
-    );
+    btn3.addEventListener('click', (e) => {
+      btn3.textContent = `CLICKED ${++count3} TIMES`;
+    });
+    btn3.removeEventListener('click', (e) => {
+      btn3.textContent = `CLICKED ${++count3} TIMES`;
+    });
 
-    function GetXHR(url, success, error?) {
+    function GetXHR(url, onSuccess, onError?) {
       const xhr = new XMLHttpRequest();
       xhr.addEventListener('load', (evt) => {
         if (xhr.status === 200) {
-          success(xhr.responseText);
-        } else if (error) {
-          error(xhr.responseText);
+          onSuccess(xhr.responseText);
+        } else if (onError) {
+          onError(xhr.responseText);
         }
       });
       xhr.addEventListener('error', (evt) => {
-        if (error) {
-          error(xhr.responseText);
+        if (onError) {
+          onError(xhr.responseText);
         }
       });
       xhr.open('GET', url, true);

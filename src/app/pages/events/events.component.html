@@ -1,12 +1,11 @@
-<h1>Event Listeners</h1>
+<h1>PART 1 - Event Listeners</h1>
 <p>In native javascript, event handling takes the form of 'addEventListener' and 'removeEventListener'</p>
 <pre>
 const btn1 = document.querySelector('#click_me1');
 let count1 = 0;
-const fn1 = (e) => &#123;
+btn1.addEventListener('click', (e) => &#123;
   btn1.textContent = `CLICKED $&#123;++count1&#125; TIMES`;
-&#125;;
-btn1.addEventListener('click', fn1);
+&#125;);
 </pre>
 <p>
 	<button id="click_me1">CLICK ME</button>
@@ -30,18 +29,12 @@ btn2.removeEventListener('click', fn2);
 <pre>
 const btn3 = document.querySelector('#click_me3');
 let count3 = 0;
-btn3.addEventListener(
-  'click',
-  (e) => &#123;
-	btn3.textContent = `CLICKED $&#123;++count3&#125; TIMES`;
-  &#125;
-);
-btn3.removeEventListener(
-  'click',
-  (e) => &#123;
-	btn3.textContent = `CLICKED $&#123;++count3&#125; TIMES`;
-  &#125;
-);
+btn3.addEventListener('click', (e) => &#123;
+  btn3.textContent = `CLICKED $&#123;++count3&#125; TIMES`;
+&#125;);
+btn3.removeEventListener('click', (e) => &#123;
+  btn3.textContent = `CLICKED $&#123;++count3&#125; TIMES`;
+&#125;);
 </pre>
 <p>
 	<button id="click_me3">CLICK ME</button>
@@ -49,25 +42,25 @@ btn3.removeEventListener(
 <p>An ajax call via an XmlHttpRequest is a bit more complicated.  Both a 'load' and an 'error' event is needed.</p>
 <div class="flex-column">
 	<pre>
-function GetXHR(url, success, error?) &#123;
+function GetXHR(url, onSuccess, onError?) &#123;
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load', (evt) => &#123;
 	if (xhr.status === 200) &#123;
-	  success(xhr.responseText);
+	  onSuccess(xhr.responseText);
 	&#125; else if (error) &#123;
-	  error(xhr.responseText);
+	  onError(xhr.responseText);
 	&#125;
   &#125;);
   xhr.addEventListener('error', (evt) => &#123;
 	if (error) &#123;
-	  error(xhr.responseText);
+	  onError(xhr.responseText);
 	&#125;
   &#125;);
   xhr.open('GET', url, true);
   xhr.send();
 &#125;
 
-const btn4 = document.querySelector('#test_xhr') as HTMLButtonElement;
+const btn4 = document.querySelector('#test_xhr');
 const pre4 = document.querySelector('#xhr_result');
 btn4.addEventListener('click', (e) => &#123;
   btn4.disabled = true;

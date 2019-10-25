@@ -24,7 +24,7 @@ export class ObservablesComponent implements OnInit, OnDestroy {
     let count2 = 0;
     const obs2 = fromEvent(btn2, 'click');
     const sub2 = obs2.subscribe((e) => {
-      btn2.textContent = `CLICKED ${++count2} TIMES`;
+      btn2.textContent = `CLICKED ${++count2} TIME`;
       sub2.unsubscribe();
       btn2.disabled = true;
     });

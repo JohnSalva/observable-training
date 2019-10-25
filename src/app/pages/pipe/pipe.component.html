@@ -1,4 +1,4 @@
-<h1>Pipes</h1>
+<h1>PART 5 - Pipes</h1>
 <p>The RxJS library supplies a 'pipe' method with any observable.</p>
 <p>Since an observable is emitting data, 'pipe' allows you to affect the data that is being emitted.</p>
 <p>One can:</p>
@@ -15,8 +15,8 @@
 </ol>
 <p>Arguably, pipes are the most complicated AND the most powerful aspects of observables.</p>
 <p>It's important to note that when you pipe an observable, you're making a NEW OBSERVABLE.</p>
-<p>Once could subscribed to the original observable and get different results than subscribing to the piped observable.</p>
-<p>Filter example:</p>
+<p>Once could subscribe to the original observable and get different results than subscribing to the piped observable.</p>
+<p><strong>pipe(filter)</strong> example:</p>
 <div class="flex-column">
 	<pre>
 const obs1 = <strong>from</strong>([1, 2, 3, 4, 5]).pipe(<strong>filter</strong>(<em>num => num % 2 === 0</em>));
@@ -24,16 +24,9 @@ const btn1 = document.querySelector('#click_me1');
 const res1 = document.querySelector('#result1');
 btn1.addEventListener('click', (e) => &#123;
   res1.textContent = 'OBSERVING';
-  const onNext = (n) => &#123;
-	res1.textContent += '\n' + `OBSERVED: $&#123;n&#125;`;
-  &#125;;
-  const onError = (e) => &#123;
-	alert('ERROR');
-  &#125;;
-  const onComplete = () => &#123;
-	res1.textContent += '\nCOMPLETE';
-  &#125;;
-  obs1.subscribe(onNext, onError, onComplete);
+  obs1.subscribe((n) => &#123;
+    res1.textContent += '\n' + `OBSERVED: $&#123;n&#125;`;
+  &#125;);
 &#125;);
 
 const clear1 = document.querySelector('#clear1');
@@ -47,7 +40,7 @@ clear1.addEventListener('click', (e) => &#123;
 	<button id="click_me1">CLICK ME</button>
 	&nbsp;
 	<button id="clear1">CLEAR LOG</button>
-</p><p>Map example:</p>
+</p><p><strong>pipe(map)</strong> example:</p>
 <div class="flex-column">
 	<pre>
 const obs2 = <strong>from</strong>([1, 2, 3, 4, 5]).pipe(<strong>map</strong>(<em>num => num * 2</em>));
@@ -55,16 +48,9 @@ const btn2 = document.querySelector('#click_me2');
 const res2 = document.querySelector('#result2');
 btn2.addEventListener('click', (e) => &#123;
   res2.textContent = 'OBSERVING';
-  const onNext = (n) => &#123;
-	res2.textContent += '\n' + `OBSERVED: $&#123;n&#125;`;
-  &#125;;
-  const onError = (e) => &#123;
-	alert('ERROR');
-  &#125;;
-  const onComplete = () => &#123;
-	res2.textContent += '\nCOMPLETE';
-  &#125;;
-  obs2.subscribe(onNext, onError, onComplete);
+  obs2.subscribe((n) => &#123;
+    res2.textContent += '\n' + `OBSERVED: $&#123;n&#125;`;
+  &#125;);
 &#125;);
 
 const clear2 = document.querySelector('#clear2');
@@ -78,7 +64,7 @@ clear2.addEventListener('click', (e) => &#123;
 	<button id="click_me2">CLICK ME</button>
 	&nbsp;
 	<button id="clear2">CLEAR LOG</button>
-</p><p>First example:</p>
+</p><p><strong>pipe(first)</strong> example:</p>
 <div class="flex-column">
 	<pre>
 const obs3 = <strong>from</strong>([1, 2, 3, 4, 5]).pipe(<strong>first</strong>());
@@ -86,16 +72,9 @@ const btn3 = document.querySelector('#click_me3');
 const res3 = document.querySelector('#result3');
 btn3.addEventListener('click', (e) => &#123;
   res3.textContent = 'OBSERVING';
-  const onNext = (n) => &#123;
-	res3.textContent += '\n' + `OBSERVED: $&#123;n&#125;`;
-  &#125;;
-  const onError = (e) => &#123;
-	alert('ERROR');
-  &#125;;
-  const onComplete = () => &#123;
-	res3.textContent += '\nCOMPLETE';
-  &#125;;
-  obs3.subscribe(onNext, onError, onComplete);
+  obs3.subscribe((n) => &#123;
+    res3.textContent += '\n' + `OBSERVED: $&#123;n&#125;`;
+  &#125;);
 &#125;);
 
 const clear3 = document.querySelector('#clear3');

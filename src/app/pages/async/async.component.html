@@ -1,4 +1,4 @@
-<h1>"async" and "await"</h1>
+<h1>PART 3 - "async" and "await"</h1>
 <p>When Promises were added to ES6 as native javascript functionality, another design pattern was added to the language,
 	which is the ability to 'await' for asyncronous code to complete.</p>
 <p>Imagine you had a series of three ajax calls you needed to make, but you needed the results from #1 to run #2, and
@@ -8,45 +8,45 @@
 GetXHR('https://cs8.scorpion.co/oauth/test')
   .then(function (data) &#123;
     console.log('ONE', data);
-      GetXHR('https://cs8.scorpion.co/oauth/test')
-        .then(function (data) &#123;
-          console.log('TWO', data);
-            GetXHR('https://cs8.scorpion.co/oauth/test')
-              .then(function (data) &#123;
-                 console.log('THREE', data);
-               &#125;)
-        &#125;)
-  &#125;)
+    GetXHR('https://cs8.scorpion.co/oauth/test')
+      .then(function (data) &#123;
+        console.log('TWO', data);
+        GetXHR('https://cs8.scorpion.co/oauth/test')
+          .then(function (data) &#123;
+             console.log('THREE', data);
+          &#125;);
+      &#125;);
+  &#125;);
 </pre>
-<p>The code can become hard to follow as you've got nested handlers inside handlers inside handlers.</p>
+<p>The code can become hard to follow, because you have handlers inside handlers inside handlers.</p>
 <p>But because the GetXHR method returns a promise, it allows one to 'await' the Promise.</p>
-<p>This is a special javascript keyword that says 'wait here for this promise to resolve'</p>
+<p>This is a special javascript keyword that says 'wait here for this promise to resolve'.</p>
 <pre>
-const data1 = await GetXHR('https://cs8.scorpion.co/oauth/test');
+const data1 = <strong>await</strong> GetXHR('https://cs8.scorpion.co/oauth/test');
 console.log('ONE', data1);
-const data2 = await GetXHR('https://cs8.scorpion.co/oauth/test');
+const data2 = <strong>await</strong> GetXHR('https://cs8.scorpion.co/oauth/test');
 console.log('TWO', data2);
-const data3 = await GetXHR('https://cs8.scorpion.co/oauth/test');
+const data3 = <strong>await</strong> GetXHR('https://cs8.scorpion.co/oauth/test');
 console.log('THREE', data3);
 </pre>
-<p>When the code sees the 'await' execution, it HALTS until the promise is resolved. It takes the value returned by the
-	'resolve' function and assigns it to the variable. And only then does it move onto the next line of code.</p>
+<p>When the code sees the 'await' keyword, it HALTS until the promise is resolved. Once resolved, it takes the value returned by the
+	Promise and assigns it to the variable. And <strong>only then</strong> does it move onto the next line of code.</p>
 <p>Now, this code snippet is actually incomplete, because javascript 'await' will not work in a regular code block.
-	Reason being that if javascript stopped executing because it saw the 'await' keyword, your entire application would
-	be frozen.</p>
+	Reason being that if javascript stopped executing because it saw the 'await' keyword, your entire application
+	(including the browser itself) would be frozen waiting for the Promise to resolve.</p>
 <p>This would be BAD<sup><small>(TM)</small></sup></p>
-<p>So the way to use await, is create an asyncronouse function and put the 'await' keyword inside it.</p>
+<p>So the way to use await, is create an asynchronous function and put the 'await' keyword inside it.</p>
 <div class="flex-column">
 	<pre>
-const btn1 = document.querySelector('#test_xhr') as HTMLButtonElement;
+const btn1 = document.querySelector('#test_xhr');
 const pre1 = document.querySelector('#xhr_result');
 
 async function RunTest() &#123;
-  const data1 = await GetXHR('https://cs8.scorpion.co/oauth/test') as string;
+  const data1 = <strong>await</strong> GetXHR('https://cs8.scorpion.co/oauth/test');
   pre1.textContent = 'ONE - ' + data1;
-  const data2 = await GetXHR('https://cs8.scorpion.co/oauth/test') as string;
+  const data2 = <strong>await</strong> GetXHR('https://cs8.scorpion.co/oauth/test');
   pre1.textContent += '\n' + 'TWO - ' + data2;
-  const data3 = await GetXHR('https://cs8.scorpion.co/oauth/test') as string;
+  const data3 = <strong>await</strong> GetXHR('https://cs8.scorpion.co/oauth/test');
   pre1.textContent += '\n' + 'THREE - ' + data3;
   pre1.textContent += '\n' + 'COMPLETE';
   btn1.disabled = false;
@@ -68,10 +68,10 @@ btn1.addEventListener('click', (e) => &#123;
 <p>The 'async' keyword in front of the function makes the 'await' available.</p>
 <p>What happens is this:</p>
 <ol>
-	<li>The 'RunText' method HALTS and waits for the Promise to resolve</li>
-	<li>But it IMMEDIATELY returns control back to whatever called 'RunText'</li>
-	<li>That progrem then IMMEDIATELY executes it's next step</li>
-	<li>As soon as the Promise is resolve,d the 'RunText' program picks up where it left off any continues.</li>
+	<li>The 'RunTest' method HALTS and waits for the Promise to resolve</li>
+	<li>But it IMMEDIATELY returns control back to the <strong>caller</strong> of 'RunTest'</li>
+	<li>That program then moves onto the next step right away.</li>
+	<li>As soon as the Promise is resolved, the 'RunTest' program picks up where it left off.</li>
 </ol>
 <p class="flex-column">
 	<a routerLink="/promises"><strong>PART 2</strong> - Promises</a>

@@ -30,7 +30,7 @@ a, a:visited {
 pre {
 	display: block;
 	font-family: "Lucida Console", Monaco, monospace;
-    font-size: 12px;
+    font-size: 11px;
     tab-size: 4;
 	line-height: 1.5;
 	border: solid 1px #ccc;
@@ -49,6 +49,10 @@ pre {
 
 .flex-column > pre + pre {
 	margin-left: 10px;
+}
+
+pre strong {
+	color: #800080;
 }
 
 pre em {

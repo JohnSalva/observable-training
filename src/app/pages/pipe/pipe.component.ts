@@ -18,16 +18,9 @@ export class PipeComponent implements OnInit {
     const res1 = document.querySelector('#result1');
     btn1.addEventListener('click', (e) => {
       res1.textContent = 'OBSERVING';
-      const onNext = (n) => {
+      obs1.subscribe((n) => {
         res1.textContent += '\n' + `OBSERVED: ${n}`;
-      };
-      const onError = (e) => {
-        alert('ERROR');
-      };
-      const onComplete = () => {
-        res1.textContent += '\nCOMPLETE';
-      };
-      obs1.subscribe(onNext, onError, onComplete);
+      });
     });
 
     const clear1 = document.querySelector('#clear1');
@@ -40,16 +33,9 @@ export class PipeComponent implements OnInit {
     const res2 = document.querySelector('#result2');
     btn2.addEventListener('click', (e) => {
       res2.textContent = 'OBSERVING';
-      const onNext = (n) => {
+      obs2.subscribe((n) => {
         res2.textContent += '\n' + `OBSERVED: ${n}`;
-      };
-      const onError = (e) => {
-        alert('ERROR');
-      };
-      const onComplete = () => {
-        res2.textContent += '\nCOMPLETE';
-      };
-      obs2.subscribe(onNext, onError, onComplete);
+      });
     });
 
     const clear2 = document.querySelector('#clear2');
@@ -62,16 +48,9 @@ export class PipeComponent implements OnInit {
     const res3 = document.querySelector('#result3');
     btn3.addEventListener('click', (e) => {
       res3.textContent = 'OBSERVING';
-      const onNext = (n) => {
+      obs3.subscribe((n) => {
         res3.textContent += '\n' + `OBSERVED: ${n}`;
-      };
-      const onError = (e) => {
-        alert('ERROR');
-      };
-      const onComplete = () => {
-        res3.textContent += '\nCOMPLETE';
-      };
-      obs3.subscribe(onNext, onError, onComplete);
+      });
     });
 
     const clear3 = document.querySelector('#clear3');

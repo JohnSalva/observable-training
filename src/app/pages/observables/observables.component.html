@@ -1,20 +1,20 @@
-<h1>Observables</h1>
+<h1>PART 4 - Observables</h1>
 <p>Observables are another design pattern that shares some similaries with both event handling and promises.</p>
 <p>The concept of this design pattern has been around for a while, but it's only more recently been implemented in
-	javascript in a library called 'rxjs'</p>
+	javascript in a library called 'RxJS'</p>
 <p>RX in this case stands for "Reactive Extensions"</p>
-<p><strong>Reactive</strong>, in the sense that it dealing with reacting changes in states</p>
-<p><strong>Extensions</strong>, in the sense that these are 'extensions' to the language you're working in to help
+<p><strong>Reactive</strong>, in the sense that it dealing with reacting to changes in state.</p>
+<p><strong>Extensions</strong>, in the sense that these are 'extensions' to the language to help
 	implement the pattern.</p>
-<p>The pattern includes:</p>
+<p>In the Observable pattern we have:</p>
 <ol>
-	<li><strong>AN OBVSERVABLE.</strong> This is a thing that can be observed. It is an object that represents the
+	<li>An <strong>OBVSERVABLE.</strong> This is a <em>thing</em> that can be <em>observed</em>. It is an object that represents the
 		state. One obtains the observable first, and then one observes it.</li>
-	<li><strong>AN OBSERVER.</strong> This is the things doing the observing. When the observable says "there's the new
-		state", the observe does something with the new state.</li>
+	<li>An <strong>OBSERVER.</strong> This is the <em>thing</em> doing the <em>observing</em>. When the observable says "here is a new
+		state", the observer then <em>does something</em> with the new state.</li>
 </ol>
 <p>Similar to the event handling, one subscribes to the observable.</p>
-<p>In the example below, 'fromEvent' is a specialized method that creates an Observable object off of the click event.</p>
+<p>In the example below, 'fromEvent' is a specialized method that creates an Observable object off of a click event.</p>
 <pre>
 const btn1 = document.querySelector('#click_me1');
 let count1 = 0;
@@ -29,11 +29,11 @@ const sub1 = obs1.subscribe((e) => &#123;
 <p>Different from event handling, the activity of 'subscribe' returns an object called a 'Subscription'. This object
 	contains the method allowing one to unsubscribe.  After the first click the observable is unsubscribed.</p>
 <pre>
-const btn2 = document.querySelector('#click_me2') as HTMLButtonElement;
+const btn2 = document.querySelector('#click_me2');
 let count2 = 0;
 const obs2 = <strong>fromEvent</strong>(btn2, 'click');
 const sub2 = obs2.subscribe((e) => &#123;
-  btn2.textContent = `CLICKED $&#123;++count2&#125; TIMES`;
+  btn2.textContent = `CLICKED $&#123;++count2&#125; TIME`;
   sub2.unsubscribe();
   btn2.disabled = true;
 &#125;);
@@ -41,7 +41,7 @@ const sub2 = obs2.subscribe((e) => &#123;
 <p>
 	<button id="click_me2">CLICK ME</button>
 </p>
-<p>Event handling is a specific way to use obsevables, but at it's core, an observable is simply a pattern to emit states.</p>
+<p>At it's core, an observable is simply a pattern to emit states.</p>
 <p>Consider this:</p>
 <div class="flex-column">
 	<pre>
@@ -78,7 +78,7 @@ clear3.addEventListener('click', (e) => &#123;
 </p>
 <p>There are a couple of things to note about this:</p>
 <ol>
-	<li>The observable does NOTHING until it is subscribed to.</li>
+	<li>This observable does NOTHING until it is subscribed to.</li>
 	<li>It does not get destroyed when complete.</li>
 	<li>It can subscribed to as many times as you like.</li>
 	<li>Because it completes, it does not need the unsubscribed to.</li>

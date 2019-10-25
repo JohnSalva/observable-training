@@ -1,27 +1,27 @@
-<h1>Promises</h1>
-<p>Promises is a design pattern that allows for dealing with asyncronous code.</p>
-<p>It shares some similarities with event handling, but it's express purpose is to deal with something that will return
-	a result at some future point.</p>
-<p>The 'event' in this case would be 'the result is now available'.</p>
-<p>The idea is, a piece of code kicks off process that will be run asyncronously, but it IMMEDIATELY returns an object.
-</p>
+<h1>PART 2 - Promises</h1>
+<p>Promises are part of a design pattern that allows for dealing with asyncronous code.</p>
+<p>It shares some similarities with event handling, but it's express purpose is to deal with something that will <strong>return
+	a result</strong> at some future point.</p>
+<p>The 'event' in this case would be <em>'the result is now available'</em>.</p>
+<p>The idea is, a piece of code kicks off process that will be run asyncronously, but it returns an object immediately,
+	before the asyncronous code is completed.</p>
 <p>This object (called a Promise), is a reference that allows one to manage what happens when the asyncronous process is
 	complete.</p>
-<p>Take the ajax request in the event handler. If you had a method that returned a promise, it might look somethinig
+<p>Take the ajax request in the event handler. If you had a method that returned a promise, it might look something
 	like this:</p>
 <pre>
 const promise = GetXHR('https://cs8.scorpion.co/oauth/test');
-promise.then(function (data) &#123;
+promise.<strong>then</strong>(function (data) &#123;
 	btn4.textContent = 'COMPLETE';
 	btn4.disabled = false;
 	pre4.textContent = data;
 &#125;)
 </pre>
 <p>The method 'then' in this case allows one to describe what to do when the asyncronous code completes.</p>
-<p>In the javascript implementation of promises, there are three main methods that belong to the Promise object:</p>
+<p>There are three main methods that belong to the Promise object:</p>
 <ol>
-	<li><strong>promise.then</strong>(<em>handler</em>) - what to do when the asyncronous code is completed successfully.
-	</li>
+	<li><strong>promise.then</strong>(<em>handler</em>) - what to do when the asyncronous code is completed successfully and
+		returns it's data.</li>
 	<li><strong>promise.catch</strong>(<em>handler</em>) - what to do if there is an error and the code cannot complete
 		successfully.
 	</li>
@@ -72,7 +72,7 @@ btn1.addEventListener('click', (e) => &#123;
 <p>The Promise object is constructed by passing in a handler.  That handler accepts two parameters, a 'resolve' and a 'reject' method.</p>
 <p>Both of the methods are supplied BY THE PROMISE itself. In other words, the internal plumbing of the Promise is
 	supplying those methods to you, the developer.</p>
-<p>Your code runs the 'resolve' when everything is good, and the 'reject' if it isn't</p>
+<p>Your code runs the 'resolve' when everything is good, and the 'reject' if it isn't.</p>
 <p>The Promise takes care of the rest.</p>
 <p class="flex-column">
 	<a routerLink="/events"><strong>PART 1</strong> - Events</a>

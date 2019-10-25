@@ -1,16 +1,14 @@
-<h1>Subjects</h1>
+<h1>PART 6 - Subjects</h1>
 <p>A 'subject' is a specialized type of observable that allows you, as the developer, to control how the data is emitted.</p>
-<p>Since an observable is emitting data, 'pipe' allows you to affect the data that is being emitted.</p>
 <p>Looking at the observable from earlier:</p>
 <pre>
 const obs = <strong>from</strong>([1, 2, 3, 4]);
 </pre>
 <p>Once one subscribes, all 4 values will be emitted immediately. There is no way to add a new value, nor is it possible
 	to change 'when' the values are emitted.</p>
-<p>When you create a subject, it exposes the ability to emit through the 'next' method, and to complete any
+<p>But when you create a subject, it exposes the ability to emit through the 'next' method, and to complete any
 	subscriptions through the complete method.</p>
-<p>It's important to note that the Subject can emit data whether or not there are any subscriptions. This will have
-	different effects depending on the type of subject.</p>
+<p>It's important to note that the Subject can emit data even if there are no subscriptions listening.</p>
 <p>Example:</p>
 <div class="flex-column">
 	<pre>
@@ -45,17 +43,34 @@ clear1.addEventListener('click', (e) => &#123;
 	</pre>
 	<pre id="result1"></pre>
 </div>
-<p>Some things to note</p>
-<ol>
-	<li>The onComplete function is never called, because the 'complete' method on the subject is never called.</li>
-	<li>The subject is emitting vales even when there are no subscriptions.</li>
-	<li>Re-subscribing to the subject doesn't pick up where it left off, but at whatever the current state is.</li>
-</ol>
 <p>
 	<button id="click_me1">START</button>
 	&nbsp;
 	<button id="clear1">STOP</button>
 </p>
+<p>Some things to note</p>
+<ol>
+	<li>The <strong>onComplete</strong> handler is never called, because the 'complete' method on the subject was never called.</li>
+	<li>The subject is emitting vales even when there are no subscriptions.</li>
+	<li>Re-subscribing to the subject doesn't pick up where it left off, but at the current state of the subject.</li>
+</ol>
+<hr>
+<p>Note: whenever you create a Subject, do not ever pass a reference of that subject to other parts of your code.</p>
+<p>Instead, create an observable of the subject and pass THAT.</p>
+<p>Example:</p>
+<pre>
+const subj = new Subject&lt;number&gt;();
+let counter = 0;
+setInterval(() => &#123;
+  subj.next(++counter);
+&#125;, 1000);
+const obs = subj.asObservable();
+return obs;
+</pre>
+<p>The Subject can control the state and emit data. That should only ever under the control of the part of the
+	application that CREATED the subject.</p>
+<p>When you 'asObservable' a subject, that observable doesn't have access to the 'next' method and can only VIEW the
+	state, it cannot change it.</p>
 <p class="flex-column">
 	<a routerLink="/pipe"><strong>PART 5</strong> - Pipes</a>
 	<a routerLink="/"><strong>Back to start</strong></a>
